@@ -69,9 +69,9 @@ Each entry is either:
   )
 
 (defun my-spacemacs-layer/pre-init-org ()
-  ;  (setq org-startup-indented t)
-  (setq org-directory "~/Dropbox/orgfiles")
-  (setq org-agenda-files (list org-directory))
+  ;(setq org-startup-indented t)
+  ;(setq org-directory "~/Dropbox/orgfiles")
+  ;(setq org-agenda-files (list org-directory))
   (setq org-export-backends '(ascii html icalendar latex beamer))
   )
 
