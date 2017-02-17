@@ -83,7 +83,7 @@ Each entry is either:
         '((R . t)
           (python . t)
           (emacs-lisp . t)
-          (sh . t)
+          (shell . t)
           ))
   )
 
