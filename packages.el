@@ -35,7 +35,6 @@
     (ob :location built-in)
     (tramp-sh :location built-in)
     multi-term
-    evil
     )
   "The list of Lisp packages required by the my-spacemacs-layer layer.
 
@@ -63,10 +62,6 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-
-(defun my-spacemacs-layer/pre-init-evil ()
-  (setq evil-search-module (quote evil-search))
-  )
 
 (defun my-spacemacs-layer/pre-init-org ()
   ;(setq org-startup-indented t)
