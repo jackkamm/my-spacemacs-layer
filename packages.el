@@ -35,6 +35,7 @@
     (ob :location built-in)
     (tramp-sh :location built-in)
     multi-term
+    ess
     )
   "The list of Lisp packages required by the my-spacemacs-layer layer.
 
@@ -102,4 +103,9 @@ Each entry is either:
     )
   )
 
+(defun my-spacemacs-layer/pre-init-ess ()
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (ess-toggle-underscore nil)))
+  )
 ;;; packages.el ends here
