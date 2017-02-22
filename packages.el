@@ -80,7 +80,7 @@ Each entry is either:
   (setq org-confirm-babel-evaluate nil)
 
   (setq org-babel-load-languages
-        '((R . t)
+        '(;(R . t)
           (python . t)
           (emacs-lisp . t)
           (shell . t)
