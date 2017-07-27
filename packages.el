@@ -33,6 +33,7 @@
   '(
     (org :location built-in)
     (ob :location built-in)
+    ob-ipython
     (tramp-sh :location built-in)
     multi-term
     ;ess
@@ -80,12 +81,15 @@ Each entry is either:
   (setq org-confirm-babel-evaluate nil)
 
   (setq org-babel-load-languages
-        '(;(R . t)
-          (python . t)
+        '((R . t)
+          ;(python . t)
+          (ipython . t)
           (emacs-lisp . t)
           (shell . t)
           ))
   )
+
+(defun my-spacemacs-layer/init-ob-ipython ())
 
 (defun my-spacemacs-layer/pre-init-tramp-sh ()
   ;; use correct path when executing code block in remote :dir
