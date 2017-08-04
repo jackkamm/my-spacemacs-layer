@@ -36,6 +36,7 @@
     ob-ipython
     (tramp-sh :location built-in)
     multi-term
+    avy
     ;ess
     )
   "The list of Lisp packages required by the my-spacemacs-layer layer.
@@ -65,11 +66,19 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+(defun spacemacs-editing/post-init-avy ()
+  (spacemacs/set-leader-keys
+    "jL" 'evil-avy-goto-char-in-line))
+
 (defun my-spacemacs-layer/pre-init-org ()
   ;(setq org-startup-indented t)
   ;(setq org-directory "~/Dropbox/orgfiles")
   ;(setq org-agenda-files (list org-directory))
   (setq org-export-backends '(ascii html icalendar latex beamer))
+  )
+
+(defun my-spacemacs-layer/post-init-org ()
+  (add-hook 'org-mode-hook 'spacemacs/toggle-line-numbers-off 'append)
   )
 
 (defun my-spacemacs-layer/pre-init-ob ()
@@ -82,7 +91,7 @@ Each entry is either:
 
   (setq org-babel-load-languages
         '((R . t)
-          ;(python . t)
+          (python . t)
           (ipython . t)
           (emacs-lisp . t)
           (shell . t)
