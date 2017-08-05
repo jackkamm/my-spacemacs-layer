@@ -68,7 +68,7 @@ Each entry is either:
 
 (defun spacemacs-editing/post-init-avy ()
   (spacemacs/set-leader-keys
-    "jL" 'evil-avy-goto-char-in-line))
+    "oj" 'evil-avy-goto-char-in-line))
 
 (defun my-spacemacs-layer/pre-init-org ()
   ;(setq org-startup-indented t)
@@ -82,10 +82,6 @@ Each entry is either:
   )
 
 (defun my-spacemacs-layer/pre-init-ob ()
-  ;; for tangling makefiles, tabs must be preserved
-  ;; (set this with a file-local-variable instead)
-  ;(setq org-src-preserve-indentation t)
-
   ;; don't ask to evaluate babel src code
   (setq org-confirm-babel-evaluate nil)
 
@@ -96,6 +92,12 @@ Each entry is either:
           (emacs-lisp . t)
           (shell . t)
           ))
+  )
+
+(defun my-spacemacs-layer/post-init-ob ()
+  ;; macro to send ob src block to REPL asynchronously
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "os" ",',sb,c")
   )
 
 (defun my-spacemacs-layer/init-ob-ipython ())
