@@ -67,7 +67,7 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun spacemacs-editing/pre-init-helm ()
+(defun my-spacemacs-layer/pre-init-helm ()
   ;; alternative to dotspacemacs-helm-use-fuzzy 'always,
   ;; fixes https://github.com/syl20bnr/spacemacs/issues/7325
   ;; TODO submit PR?
@@ -75,13 +75,14 @@ Each entry is either:
   (setq helm-completion-in-region-fuzzy-match t)
   )
 
-(defun spacemacs-editing/pre-init-evil ()
+(defun my-spacemacs-layer/pre-init-evil ()
   ;; alternative to dotspacemacs-distinguish-gui-tab
   ;; allows C-i jump in terminal as well as in gui
   ;; TODO submit PR? reference: https://github.com/syl20bnr/spacemacs/issues/5050
-  (setq evil-want-C-i-jump t))
+  (setq evil-want-C-i-jump t)
+  )
 
-(defun spacemacs-editing/post-init-evil ()
+(defun my-spacemacs-layer/post-init-evil ()
   ;; replacement for "," vim-action
   (define-key evil-motion-state-map (kbd "C-;") 'evil-repeat-find-char-reverse))
 
