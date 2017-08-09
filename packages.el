@@ -38,7 +38,6 @@
     multi-term
     avy
     evil
-    helm
     )
   "The list of Lisp packages required by the my-spacemacs-layer layer.
 
@@ -66,14 +65,6 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
-
-(defun my-spacemacs-layer/pre-init-helm ()
-  ;; alternative to dotspacemacs-helm-use-fuzzy 'always,
-  ;; fixes https://github.com/syl20bnr/spacemacs/issues/7325
-  ;; TODO submit PR?
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  )
 
 (defun my-spacemacs-layer/pre-init-evil ()
   ;; alternative to dotspacemacs-distinguish-gui-tab
@@ -120,7 +111,8 @@ Each entry is either:
     "os" ",',sb,c")
   )
 
-(defun my-spacemacs-layer/init-ob-ipython ())
+(defun my-spacemacs-layer/init-ob-ipython ()
+  (use-package ob-ipython))
 
 (defun my-spacemacs-layer/pre-init-tramp-sh ()
   ;; use correct path when executing code block in remote :dir
