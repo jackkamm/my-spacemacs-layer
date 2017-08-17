@@ -66,31 +66,33 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun my-spacemacs-layer/pre-init-evil ()
-  ;; alternative to dotspacemacs-distinguish-gui-tab
-  ;; allows C-i jump in terminal as well as in gui
-  ;; TODO submit PR? reference: https://github.com/syl20bnr/spacemacs/issues/5050
-  (setq evil-want-C-i-jump t)
-  )
+;(defun my-spacemacs-layer/pre-init-evil ()
+;  ;; alternative to dotspacemacs-distinguish-gui-tab
+;  ;; allows C-i jump in terminal as well as in gui
+;  ;; TODO submit PR? reference: https://github.com/syl20bnr/spacemacs/issues/5050
+;  (setq evil-want-C-i-jump t)
+;  )
 
 (defun my-spacemacs-layer/post-init-evil ()
   ;; replacement for "," vim-action
-  (define-key evil-motion-state-map (kbd "C-;") 'evil-repeat-find-char-reverse))
+  (define-key evil-motion-state-map (kbd "C-;")
+    'evil-repeat-find-char-reverse))
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
     "oj" 'evil-avy-goto-char-in-line))
 
-(defun my-spacemacs-layer/pre-init-org ()
-  ;(setq org-startup-indented t)
-  ;(setq org-directory "~/Dropbox/orgfiles")
-  ;(setq org-agenda-files (list org-directory))
-  (setq org-export-backends '(ascii html icalendar latex beamer))
-  )
+;(defun my-spacemacs-layer/pre-init-org ()
+;  ;(setq org-startup-indented t)
+;  ;(setq org-directory "~/Dropbox/orgfiles")
+;  ;(setq org-agenda-files (list org-directory))
+;  (setq org-export-backends '(ascii html icalendar latex beamer))
+;  )
 
 (defun my-spacemacs-layer/post-init-org ()
-  (add-hook 'org-mode-hook 'spacemacs/toggle-line-numbers-off 'append)
-  )
+  (add-hook 'org-mode-hook
+            'spacemacs/toggle-line-numbers-off
+            'append))
 
 (defun my-spacemacs-layer/pre-init-ob ()
   ;; don't ask to evaluate babel src code
@@ -102,14 +104,12 @@ Each entry is either:
           (ipython . t)
           (emacs-lisp . t)
           (shell . t)
-          ))
-  )
+          )))
 
 (defun my-spacemacs-layer/post-init-ob ()
   ;; macro to send ob src block to REPL asynchronously
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "os" ",',sb,c")
-  )
+    "os" ",',sb,c"))
 
 (defun my-spacemacs-layer/init-ob-ipython ()
   (use-package ob-ipython))
@@ -118,16 +118,16 @@ Each entry is either:
   ;; use correct path when executing code block in remote :dir
   ;; or using eshell
   (with-eval-after-load 'tramp-sh
-    (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
-  )
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
 
 (defun my-spacemacs-layer/init-tramp-sh () ())
 
 (defun my-spacemacs-layer/post-init-multi-term ()
   (with-eval-after-load 'multi-term
     ;; allow Alt+Backspace in terminal
-    (add-to-list 'term-bind-key-alist '("M-DEL" . (lambda () (interactive) (term-send-raw-string "\e\d"))))
-    )
-  )
+    (add-to-list 'term-bind-key-alist
+                 '("M-DEL" . (lambda () (interactive)
+                               (term-send-raw-string "\e\d"))
+                   ))))
 
 ;;; packages.el ends here
