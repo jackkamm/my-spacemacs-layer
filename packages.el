@@ -80,7 +80,7 @@ Each entry is either:
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
-    "oj" 'evil-avy-goto-char-in-line))
+    "of" 'evil-avy-goto-char-in-line))
 
 ;(defun my-spacemacs-layer/pre-init-org ()
 ;  ;(setq org-startup-indented t)
