@@ -38,6 +38,7 @@
     multi-term
     avy
     evil
+    (dired :location built-in)
     )
   "The list of Lisp packages required by the my-spacemacs-layer layer.
 
@@ -76,7 +77,16 @@ Each entry is either:
 (defun my-spacemacs-layer/post-init-evil ()
   ;; replacement for "," vim-action
   (define-key evil-motion-state-map (kbd "C-;")
-    'evil-repeat-find-char-reverse))
+    'evil-repeat-find-char-reverse)
+  ;; remove RET binding
+  (define-key evil-motion-state-map (kbd "RET")
+    nil)
+  ;; i switches from motion-state to emacs-state
+  (define-key evil-motion-state-map "i"
+    'evil-emacs-state)
+  ;; ESC exits emacs state
+  (define-key evil-emacs-state-map (kbd "ESC")
+    'evil-exit-emacs-state))
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
@@ -129,5 +139,8 @@ Each entry is either:
                  '("M-DEL" . (lambda () (interactive)
                                (term-send-raw-string "\e\d"))
                    ))))
+
+(defun my-spacemacs-layer/post-init-dired ()
+  (evil-set-initial-state 'dired-mode 'motion))
 
 ;;; packages.el ends here
