@@ -86,7 +86,9 @@ Each entry is either:
     'evil-emacs-state)
   ;; ESC exits emacs state
   (define-key evil-emacs-state-map (kbd "ESC")
-    'evil-exit-emacs-state))
+    'evil-exit-emacs-state)
+  ;; start dired in motion state
+  (evil-set-initial-state 'dired-mode 'motion))
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
@@ -122,7 +124,8 @@ Each entry is either:
     "os" ",',sb,c"))
 
 (defun my-spacemacs-layer/init-ob-ipython ()
-  (use-package ob-ipython))
+  (use-package ob-ipython
+    :defer t))
 
 (defun my-spacemacs-layer/pre-init-tramp-sh ()
   ;; use correct path when executing code block in remote :dir
@@ -139,8 +142,5 @@ Each entry is either:
                  '("M-DEL" . (lambda () (interactive)
                                (term-send-raw-string "\e\d"))
                    ))))
-
-(defun my-spacemacs-layer/post-init-dired ()
-  (evil-set-initial-state 'dired-mode 'motion))
 
 ;;; packages.el ends here
