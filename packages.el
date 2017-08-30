@@ -6,6 +6,7 @@
     multi-term
     avy
     evil
+    ess
     ))
 
 ;(defun my-spacemacs-layer/pre-init-evil ()
@@ -63,6 +64,12 @@
   ;; macro to send ob src block to REPL asynchronously
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "os" ",',sb,c"))
+
+(defun my-spacemacs-layer/post-init-ess ()
+  ;; macro to send current line and goto next line
+  (spacemacs/set-leader-keys-for-major-mode 'ess-mode
+    "ol" ",slj")
+  )
 
 (defun my-spacemacs-layer/init-ob-ipython ()
   (use-package ob-ipython
