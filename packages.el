@@ -1,14 +1,12 @@
 (defconst my-spacemacs-layer-packages
-  '(
-    (org :location built-in)
+  '((org :location built-in)
     (ob :location built-in)
     ob-ipython
     (tramp-sh :location built-in)
     multi-term
     avy
     evil
-    (dired :location built-in)
-    )
+    ))
 
 ;(defun my-spacemacs-layer/pre-init-evil ()
 ;  ;; alternative to dotspacemacs-distinguish-gui-tab
