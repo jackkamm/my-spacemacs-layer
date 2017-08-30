@@ -7,7 +7,15 @@
     avy
     evil
     ess
+    auctex
     ))
+
+(defun my-spacemacs-layer/post-init-auctex ()
+  ;; helm \includegraphics looks in local directory,
+  ;; instead of TeX search path
+  (setq LaTeX-includegraphics-read-file
+        'LaTeX-includegraphics-read-file-relative)
+  )
 
 ;(defun my-spacemacs-layer/pre-init-evil ()
 ;  ;; alternative to dotspacemacs-distinguish-gui-tab
