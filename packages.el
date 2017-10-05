@@ -7,7 +7,7 @@
     ess
     auctex
     org
-    ob-ipython
+    ;;ob-ipython
     ))
 
 (defun my-spacemacs-layer/post-init-auctex ()
@@ -53,10 +53,13 @@
   ;; don't ask to evaluate babel src code
   (setq org-confirm-babel-evaluate nil)
 
-  (spacemacs|use-package-add-hook org
-    :post-config (add-to-list 'org-babel-load-languages
-                              '(ipython . t)))
+  ;(spacemacs|use-package-add-hook org
+  ;  :post-config
+  ;  (require 'ob-ipython)
+  ;  (add-to-list 'org-babel-load-languages '(ipython . t)))
   )
+
+;(defun my-spacemacs-layer/init-ob-ipython () ())
 
 (defun my-spacemacs-layer/post-init-org ()
   (add-hook 'org-mode-hook
@@ -73,10 +76,6 @@
   (spacemacs/set-leader-keys-for-major-mode 'ess-mode
     "ol" ",slj")
   )
-
-(defun my-spacemacs-layer/init-ob-ipython ()
-  (use-package ob-ipython
-    :defer t))
 
 (defun my-spacemacs-layer/pre-init-tramp-sh ()
   ;; use correct path when executing code block in remote :dir
