@@ -6,9 +6,18 @@
     evil
     ess
     auctex
+    persp-mode
     org
     ;;ob-ipython
     ))
+
+(defun my-spacemacs-layer/post-init-persp-mode ()
+  ;; Fix weird behavior of make-frame caused by persp-mode
+  ;; https://github.com/Bad-ptr/persp-mode.el/issues/36
+  ;; https://github.com/syl20bnr/spacemacs/issues/6117
+  (setq persp-init-frame-behaviour (lambda (frame &optional new-frame-p) nil))
+  ;;(setq persp-init-frame-behaviour nil)
+  )
 
 (defun my-spacemacs-layer/post-init-auctex ()
   ;; helm \includegraphics looks in local directory,
