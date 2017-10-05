@@ -1,13 +1,13 @@
 (defconst my-spacemacs-layer-packages
-  '((org :location built-in)
-    (ob :location built-in)
-    ob-ipython
+  '(
     (tramp-sh :location built-in)
     multi-term
     avy
     evil
     ess
     auctex
+    org
+    ob-ipython
     ))
 
 (defun my-spacemacs-layer/post-init-auctex ()
@@ -44,34 +44,29 @@
   (spacemacs/set-leader-keys
     "of" 'evil-avy-goto-char-in-line))
 
-;(defun my-spacemacs-layer/pre-init-org ()
-;  ;(setq org-startup-indented t)
-;  ;(setq org-directory "~/Dropbox/orgfiles")
-;  ;(setq org-agenda-files (list org-directory))
-;  (setq org-export-backends '(ascii html icalendar latex beamer))
-;  )
+(defun my-spacemacs-layer/pre-init-org ()
+  ;(setq org-startup-indented t)
+  ;(setq org-directory "~/Dropbox/orgfiles")
+  ;(setq org-agenda-files (list org-directory))
+  ;(setq org-export-backends '(ascii html icalendar latex beamer))
+
+  ;; don't ask to evaluate babel src code
+  (setq org-confirm-babel-evaluate nil)
+
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages
+                              '(ipython . t)))
+  )
 
 (defun my-spacemacs-layer/post-init-org ()
   (add-hook 'org-mode-hook
             'spacemacs/toggle-line-numbers-off
-            'append))
+            'append)
 
-(defun my-spacemacs-layer/pre-init-ob ()
-  ;; don't ask to evaluate babel src code
-  (setq org-confirm-babel-evaluate nil)
-
-  (setq org-babel-load-languages
-        '((R . t)
-          (python . t)
-          (ipython . t)
-          (emacs-lisp . t)
-          (shell . t)
-          )))
-
-(defun my-spacemacs-layer/post-init-ob ()
   ;; macro to send ob src block to REPL asynchronously
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "os" ",',sb,c"))
+    "os" ",',sb,c")
+  )
 
 (defun my-spacemacs-layer/post-init-ess ()
   ;; macro to send current line and goto next line
