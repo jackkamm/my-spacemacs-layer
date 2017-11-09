@@ -6,6 +6,7 @@
     evil
     ess
     auctex
+    evil-matchit
     persp-mode
     org
     ;;ob-ipython
@@ -17,6 +18,11 @@
   ;; https://github.com/syl20bnr/spacemacs/issues/6117
   (setq persp-init-frame-behaviour (lambda (frame &optional new-frame-p) nil))
   ;;(setq persp-init-frame-behaviour nil)
+  )
+
+(defun my-spacemacs-layer/post-init-evil-matchit ()
+  ;; fix evil-matchit behavior in python
+  (setq evilmi-always-simple-jump t)
   )
 
 (defun my-spacemacs-layer/post-init-auctex ()
