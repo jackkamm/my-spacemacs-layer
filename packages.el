@@ -44,16 +44,18 @@
   (define-key evil-motion-state-map (kbd "C-;")
     'evil-repeat-find-char-reverse)
   ;; remove RET binding
-  (define-key evil-motion-state-map (kbd "RET")
-    nil)
-  ;; i switches from motion-state to emacs-state
-  (define-key evil-motion-state-map "i"
-    'evil-emacs-state)
+  ;(define-key evil-motion-state-map (kbd "RET") nil)
+
   ;; ESC exits emacs state
-  (define-key evil-emacs-state-map (kbd "ESC")
-    'evil-exit-emacs-state)
+  ;; unfortunately this seems to breaks Alt as Meta-key in emacs-mode
+  ;(define-key evil-emacs-state-map (kbd "ESC") 'evil-exit-emacs-state)
+  ;; i switches from motion-state to emacs-state
+  ;(define-key evil-motion-state-map "i" 'evil-emacs-state)
+
   ;; start dired in motion state
-  (evil-set-initial-state 'dired-mode 'motion))
+  ;(evil-set-initial-state 'dired-mode 'motion)
+  ;(evil-set-initial-state 'dired-mode 'normal)
+  )
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
@@ -101,6 +103,7 @@
 (defun my-spacemacs-layer/init-tramp-sh () ())
 
 (defun my-spacemacs-layer/post-init-multi-term ()
+  ;(evil-set-initial-state 'term-mode 'motion)
   (with-eval-after-load 'multi-term
     ;; allow Alt+Backspace in terminal
     (add-to-list 'term-bind-key-alist
