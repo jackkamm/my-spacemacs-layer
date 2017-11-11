@@ -1,5 +1,6 @@
 (defconst my-spacemacs-layer-packages
   '(
+    helm
     (tramp-sh :location built-in)
     multi-term
     avy
@@ -11,6 +12,11 @@
     org
     ;;ob-ipython
     ))
+
+(defun my-spacemacs-layer/pre-init-helm ()
+  ;; make helm work better with tramp
+  (setq helm-buffer-skip-remote-checking t)
+  )
 
 (defun my-spacemacs-layer/post-init-persp-mode ()
   ;; Fix weird behavior of make-frame caused by persp-mode
