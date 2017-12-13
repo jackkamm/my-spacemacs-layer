@@ -11,6 +11,8 @@
     persp-mode
     org
     dired-mode
+    (ipython-shell-send :location built-in)
+    python
     ;;ob-ipython
     mu4e
     ))
@@ -29,10 +31,28 @@
     :mode dired-mode)
   )
 
+(defun my-spacemacs-layer/pre-init-ipython-shell-send ()
+  (add-to-list 'load-path "~/.emacs.d/elpa/25.3/develop/ipython-shell-send-1.0.0")
+  )
+
+(defun my-spacemacs-layer/init-ipython-shell-send ()
+  (use-package ipython-shell-send
+    :commands (ipython-shell-send-region
+               ipython-shell-send-buffer
+               ipython-shell-send-defun
+               ipython-shell-send-file)))
+
+;;(defun my-spacemacs-layer/post-init-ipython-shell-send ()
+(defun my-spacemacs-layer/post-init-python ()
+  (with-eval-after-load 'python
+    (spacemacs/set-leader-keys-for-major-mode 'python-mode
+      "sb" 'ipython-shell-send-buffer
+      "sf" 'ipython-shell-send-defun
+      "sr" 'ipython-shell-send-region)))
+
 (defun my-spacemacs-layer/pre-init-helm ()
   ;; make helm work better with tramp
-  (setq helm-buffer-skip-remote-checking t)
-  )
+  (setq helm-buffer-skip-remote-checking t))
 
 (defun my-spacemacs-layer/post-init-persp-mode ()
   ;; Fix weird behavior of make-frame caused by persp-mode
