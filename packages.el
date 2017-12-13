@@ -10,8 +10,24 @@
     evil-matchit
     persp-mode
     org
+    dired-mode
     ;;ob-ipython
+    mu4e
     ))
+
+(defun my-spacemacs-layer/post-init-mu4e ()
+  ;; override the mu4e "j" binding
+  ;; TODO complain/PR/add mu4e-layer-variable?
+  (with-eval-after-load 'mu4e
+    (evilified-state-evilify-map mu4e-main-mode-map
+      :mode mu4e-main-mode)))
+
+(defun my-spacemacs-layer/post-init-dired ()
+  ;; TODO submit PR?
+  ;; enables a bunch of nice keys in dired-mode (/,v,G)
+  (evilified-state-evilify-map dired-mode-map
+    :mode dired-mode)
+  )
 
 (defun my-spacemacs-layer/pre-init-helm ()
   ;; make helm work better with tramp
