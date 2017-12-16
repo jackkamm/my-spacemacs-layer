@@ -8,27 +8,40 @@
     ess
     auctex
     evil-matchit
+    evil-mc
     persp-mode
+    gnus
     org
-    dired-mode
+    ;;dired-mode
     (ipython-shell-send :location built-in)
     python
     ;;ob-ipython
     mu4e
     ))
 
+(defun my-spacemacs-layer/post-init-gnus ()
+  ;; try to make gnus faster
+  (setq nnimap-fetch-partial-articles t)
+  ;; https://www.gnu.org/software/emacs/manual/html_node/gnus/Asynchronous-Fetching.html
+  (setq gnus-asynchronous t)
+  (setq gnus-async-prefetch-article-p (lambda () nil))
+  ;; don't fetch mail on startup
+  ;;(setq gnus-activate-level 2)
+  )
+
 (defun my-spacemacs-layer/post-init-mu4e ()
   ;; override the mu4e "j" binding
   ;; TODO complain/PR/add mu4e-layer-variable?
   (with-eval-after-load 'mu4e
     (evilified-state-evilify-map mu4e-main-mode-map
-      :mode mu4e-main-mode)))
+      :mode mu4e-main-mode))
 
-(defun my-spacemacs-layer/post-init-dired ()
-  ;; TODO submit PR?
-  ;; enables a bunch of nice keys in dired-mode (/,v,G)
-  (evilified-state-evilify-map dired-mode-map
-    :mode dired-mode)
+  (setq mu4e-compose-dont-reply-to-self t)
+  (setq mu4e-get-mail-command "mbsync -a")
+
+  ;;; only show these 2 inboxes on main screen
+  ;;(setq mu4e-maildirs-extension-custom-list
+  ;;      '("/cambridge/Inbox" "/sanger/Inbox" "/gmail/Inbox"))
   )
 
 (defun my-spacemacs-layer/pre-init-ipython-shell-send ()
@@ -87,6 +100,12 @@
 ;  ;; TODO submit PR? reference: https://github.com/syl20bnr/spacemacs/issues/5050
 ;  (setq evil-want-C-i-jump t)
 ;  )
+(defun my-spacemacs-layer/pre-init-evil-mc ()
+  ;; use local version of evil-mc
+  (add-to-list 'load-path "~/src/evil-mc"))
+
+(defun my-spacemacs-layer/post-init-evil-mc ()
+  (global-evil-mc-mode 1))
 
 (defun my-spacemacs-layer/post-init-evil ()
   ;; replacement for "," vim-action
@@ -104,7 +123,18 @@
   ;; start dired in motion state
   ;(evil-set-initial-state 'dired-mode 'motion)
   ;(evil-set-initial-state 'dired-mode 'normal)
-  )
+
+
+  ;; TODO submit PR?
+  ;; enables a bunch of nice keys in dired-mode (/,v,G)
+  (with-eval-after-load 'dired
+    (evilified-state-evilify-map dired-mode-map
+      :mode dired-mode))
+
+  ;; fix evil clipboard pasting
+  ;; https://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard
+  ;; https://github.com/syl20bnr/spacemacs/blob/master/doc/FAQ.org#prevent-the-visual-selection-overriding-my-system-clipboard
+  (fset 'evil-visual-update-x-selection 'ignore))
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
@@ -115,6 +145,10 @@
   ;(setq org-directory "~/Dropbox/orgfiles")
   ;(setq org-agenda-files (list org-directory))
   ;(setq org-export-backends '(ascii html icalendar latex beamer))
+
+  ;;; use local version of org-mode to hack on
+  ;;(add-to-list 'load-path "~/src/org-mode/lisp")
+  ;;(add-to-list 'load-path "~/src/org-mode/contrib/lisp")
 
   ;; don't ask to evaluate babel src code
   (setq org-confirm-babel-evaluate nil)
@@ -127,6 +161,9 @@
 
 ;(defun my-spacemacs-layer/init-ob-ipython () ())
 
+;;(defun my-spacemacs-layer/init-org ()
+;;  (use-package org))
+
 (defun my-spacemacs-layer/post-init-org ()
   (add-hook 'org-mode-hook
             'spacemacs/toggle-line-numbers-off
@@ -135,6 +172,14 @@
   ;; macro to send ob src block to REPL asynchronously
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "os" ",',sb,c")
+
+  ;; TODO backup this file
+  (setq org-agenda-files (list "~/org/notes.org"))
+
+  (setq org-capture-templates
+        '(("t" "todo" entry (file "~/org/notes.org")
+           "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n" :prepend t)))
+
   )
 
 (defun my-spacemacs-layer/post-init-ess ()
