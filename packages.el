@@ -16,7 +16,21 @@
     python
     ;;ob-ipython
     mu4e
+    notmuch
     ))
+
+(defun my-spacemacs-layer/post-init-notmuch ()
+  ;; send from multiple accounts with msmtp
+  ;; https://notmuchmail.org/emacstips/#index11h2
+  (setq mail-specify-envelope-from t
+        message-sendmail-envelope-from 'header
+        mail-envelope-from 'header)
+
+  (setq notmuch-search-oldest-first nil)
+
+  (spacemacs/set-leader-keys
+    "oe" (lambda () (interactive)
+           (async-shell-command "notmuch new"))))
 
 (defun my-spacemacs-layer/post-init-gnus ()
   ;; try to make gnus faster
