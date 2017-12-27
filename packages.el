@@ -12,8 +12,7 @@
     persp-mode
     gnus
     org
-    ;;dired-mode
-    (ipython-shell-send :location built-in)
+    (ipython-shell-send)
     python
     ;;ob-ipython
     mu4e
@@ -42,10 +41,6 @@
   ;;; only show these 2 inboxes on main screen
   ;;(setq mu4e-maildirs-extension-custom-list
   ;;      '("/cambridge/Inbox" "/sanger/Inbox" "/gmail/Inbox"))
-  )
-
-(defun my-spacemacs-layer/pre-init-ipython-shell-send ()
-  (add-to-list 'load-path "~/.emacs.d/elpa/25.3/develop/ipython-shell-send-1.0.0")
   )
 
 (defun my-spacemacs-layer/init-ipython-shell-send ()
