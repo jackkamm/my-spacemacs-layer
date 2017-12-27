@@ -210,12 +210,30 @@
 (defun my-spacemacs-layer/init-tramp-sh () ())
 
 (defun my-spacemacs-layer/post-init-multi-term ()
-  ;(evil-set-initial-state 'term-mode 'motion)
   (with-eval-after-load 'multi-term
-    ;; allow Alt+Backspace in terminal
-    (add-to-list 'term-bind-key-alist
-                 '("M-DEL" . (lambda () (interactive)
-                               (term-send-raw-string "\e\d"))
-                   ))))
+    (setq term-bind-key-alist
+          (append
+           term-bind-key-alist
+           (list
+            ;; allow Alt+Backspace in terminal
+            '("M-DEL" . (lambda () (interactive)
+                               (term-send-raw-string "\e\d")))
+            ;; fixes https://emacs.stackexchange.com/questions/17085/undesirable-cursor-jump-after-movement-with-m-left-or-m-right-in-term-mode
+            ;; TODO remove after upgrading to emacs26
+            '("<C-left>" . (lambda () (interactive)
+                             (term-send-raw-string "\eb")))
+            '("<M-left>" . (lambda () (interactive)
+                             (term-send-raw-string "\eb")))
+            '("<C-right>" . (lambda () (interactive)
+                              (term-send-raw-string "\ef")))
+            '("<M-right>" . (lambda () (interactive)
+                              (term-send-raw-string "\ef")))
+            ;; incremental forward/backward search
+            ;; NOTE this overrides normal state bindings
+            '("C-r" . (lambda () (interactive)
+                        (term-send-raw-string "\C-r")))
+            '("C-s" . (lambda () (interactive)
+                          (term-send-raw-string "\C-s")))
+            )))))
 
 ;;; packages.el ends here
