@@ -116,10 +116,6 @@
 ;  (setq evil-want-C-i-jump t)
 ;  )
 
-;(defun my-spacemacs-layer/pre-init-evil-mc ()
-;  ;; use local version of evil-mc
-;  (add-to-list 'load-path "~/src/evil-mc"))
-
 (defun my-spacemacs-layer/post-init-evil-mc ()
   (global-evil-mc-mode 1))
 
