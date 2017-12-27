@@ -136,17 +136,18 @@
   ;(evil-set-initial-state 'dired-mode 'motion)
   ;(evil-set-initial-state 'dired-mode 'normal)
 
-
-  ;; TODO submit PR?
-  ;; enables a bunch of nice keys in dired-mode (/,v,G)
-  (with-eval-after-load 'dired
-    (evilified-state-evilify-map dired-mode-map
-      :mode dired-mode))
-
   ;; fix evil clipboard pasting
   ;; https://emacs.stackexchange.com/questions/14940/emacs-doesnt-paste-in-evils-visual-mode-with-every-os-clipboard
   ;; https://github.com/syl20bnr/spacemacs/blob/master/doc/FAQ.org#prevent-the-visual-selection-overriding-my-system-clipboard
-  (fset 'evil-visual-update-x-selection 'ignore))
+  (fset 'evil-visual-update-x-selection 'ignore)
+
+  ;; TODO submit PR?
+  ;; enables a bunch of nice keys in dired-mode (/,v,G)
+  ;; has to be evaled after evil, dired, evil-evilified-state
+  (with-eval-after-load 'evil-evilified-state
+    (with-eval-after-load 'dired
+      (evilified-state-evilify-map dired-mode-map
+        :mode dired-mode))))
 
 (defun my-spacemacs-layer/post-init-avy ()
   (spacemacs/set-leader-keys
