@@ -17,7 +17,13 @@
     ;;ob-ipython
     mu4e
     notmuch
+    evil-easymotion
     ))
+
+(defun my-spacemacs-layer/init-evil-easymotion ()
+  (use-package evil-easymotion
+    :config
+    (evilem-default-keybindings "SPC o m")))
 
 (defun my-spacemacs-layer/post-init-notmuch ()
   ;; send from multiple accounts with msmtp
@@ -109,9 +115,10 @@
 ;  ;; TODO submit PR? reference: https://github.com/syl20bnr/spacemacs/issues/5050
 ;  (setq evil-want-C-i-jump t)
 ;  )
-(defun my-spacemacs-layer/pre-init-evil-mc ()
-  ;; use local version of evil-mc
-  (add-to-list 'load-path "~/src/evil-mc"))
+
+;(defun my-spacemacs-layer/pre-init-evil-mc ()
+;  ;; use local version of evil-mc
+;  (add-to-list 'load-path "~/src/evil-mc"))
 
 (defun my-spacemacs-layer/post-init-evil-mc ()
   (global-evil-mc-mode 1))
