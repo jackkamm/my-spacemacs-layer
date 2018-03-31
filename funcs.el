@@ -8,3 +8,7 @@
   (interactive
    (list (read-shell-command "cmd: ")))
   (call-process-region cmd nil "/usr/bin/bash" nil 0 nil "-i"))
+
+(defun my-spacemacs-layer/fetch-email ()
+  (interactive)
+  (async-shell-command "notmuch new"))

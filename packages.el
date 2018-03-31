@@ -36,8 +36,16 @@
   (setq notmuch-search-oldest-first nil)
 
   (spacemacs/set-leader-keys
-    "oe" (lambda () (interactive)
-           (async-shell-command "notmuch new"))))
+    "oe" 'my-spacemacs-layer/fetch-email)
+
+  (add-hook
+   'notmuch-message-mode-hook
+   'turn-off-auto-fill)
+
+  (add-hook
+   'notmuch-message-mode-hook
+   'spacemacs/toggle-visual-line-navigation-on t)
+  )
 
 (defun my-spacemacs-layer/post-init-gnus ()
   ;; try to make gnus faster
