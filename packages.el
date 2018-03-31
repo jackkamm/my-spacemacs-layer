@@ -19,7 +19,13 @@
     mu4e
     notmuch
     evil-easymotion
+    sphinx-doc
     ))
+
+
+(defun my-spacemacs-layer/init-sphinx-doc ()
+  (use-package sphinx-doc
+    :commands sphinx-doc-mode))
 
 (defun my-spacemacs-layer/init-evil-easymotion ()
   (use-package evil-easymotion
