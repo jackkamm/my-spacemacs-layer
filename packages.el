@@ -6,7 +6,8 @@
     avy
     (term :location built-in)
     evil
-    ess
+    ;;ess
+    ;;ein
     auctex
     evil-matchit
     evil-mc
@@ -14,18 +15,44 @@
     gnus
     org
     (ipython-shell-send)
+    ;;helm-company
     python
     ;;ob-ipython
     mu4e
     notmuch
     evil-easymotion
+    ;;gdb-mi
     sphinx-doc
+    ;;pipenv
+    ;;(ox-ipynb :location (recipe :fetcher github
+    ;;                            :repo "jkitchin/ox-ipynb"))
+    ;;ob-async
     ))
 
+;;(defun my-spacemacs-layer/init-ob-async ()
+;;  (use-package ob-async :defer t))
+
+;;(defun my-spacemacs-layer/pre-init-ox-ipynb ()
+;;  (spacemacs|use-package-add-hook org :post-config (require 'ox-ipynb)))
+;;(defun my-spacemacs-layer/init-ox-ipynb ())
+
+;;;; NOTE use realgud instead of gdb
+;;(defun my-spacemacs-layer/post-init-gdb-mi ()
+;;  ;; prevent C-d from killing gdb when trying to scroll
+;;  (evilified-state-evilify-map gdb-inferior-io-mode-map
+;;    :eval-after-load gdb-mi
+;;    :mode gdb-inferior-io-mode)
+;;  (evilified-state-evilify-map gdb-locals-mode-map
+;;    :eval-after-load gdb-mi
+;;    :mode gdb-locals-mode))
 
 (defun my-spacemacs-layer/init-sphinx-doc ()
   (use-package sphinx-doc
     :commands sphinx-doc-mode))
+
+;;(defun my-spacemacs-layer/post-init-helm-company ()
+;;  (with-eval-after-load 'helm-company
+;;    (spacemacs/set-leader-keys "o/" 'helm-company)))
 
 (defun my-spacemacs-layer/init-evil-easymotion ()
   (use-package evil-easymotion
@@ -109,8 +136,7 @@
 
 (defun my-spacemacs-layer/post-init-evil-matchit ()
   ;; fix evil-matchit behavior in python
-  (setq evilmi-always-simple-jump t)
-  )
+  (setq evilmi-always-simple-jump t))
 
 (defun my-spacemacs-layer/post-init-auctex ()
   ;; helm \includegraphics looks in local directory,
@@ -183,13 +209,16 @@
   ;; don't ask to evaluate babel src code
   (setq org-confirm-babel-evaluate nil)
 
-  ;(spacemacs|use-package-add-hook org
-  ;  :post-config
-  ;  (require 'ob-ipython)
-  ;  (add-to-list 'org-babel-load-languages '(ipython . t)))
+  ;;(spacemacs|use-package-add-hook org
+  ;;  :post-config
+  ;;  (require 'ob-ipython)
+  ;;  (add-to-list 'org-babel-load-languages '(ipython . t)))
   )
 
-;(defun my-spacemacs-layer/init-ob-ipython () ())
+;;(defun my-spacemacs-layer/pre-init-ob-ipython ()
+;;  (add-to-list 'load-path "~/Source/ob-ipython"))
+
+;;(defun my-spacemacs-layer/init-ob-ipython () ())
 
 ;;(defun my-spacemacs-layer/init-org ()
 ;;  (use-package org))
@@ -212,11 +241,24 @@
 
   )
 
-(defun my-spacemacs-layer/post-init-ess ()
-  ;; macro to send current line and goto next line
-  (spacemacs/set-leader-keys-for-major-mode 'ess-mode
-    "ol" ",slj")
-  )
+;;(defun my-spacemacs-layer/post-init-ess ()
+;;  ;; macro to send current line and goto next line
+;;  (with-eval-after-load 'ess-site
+;;    (spacemacs/set-leader-keys-for-major-mode 'ess-mode
+;;    "ol" ",slj")))
+
+;;(defun my-spacemacs-layer/pre-init-pipenv ()
+;;  ;; use local version of emacs-ipython-notebook due to https://github.com/millejoh/emacs-ipython-notebook/issues/236
+;;  (add-to-list 'load-path "~/Source/pipenv.el"))
+
+;;(defun my-spacemacs-layer/pre-init-ein ()
+;;  ;; use local version of emacs-ipython-notebook due to https://github.com/millejoh/emacs-ipython-notebook/issues/236
+;;  (add-to-list 'load-path "~/src/private/emacs-ipython-notebook/lisp"))
+
+;;(defun my-spacemacs-layer/post-init-ein ()
+;;  (with-eval-after-load 'ein-notebooklist
+;;    (evil-set-initial-state 'ein:notebooklist-mode 'motion)
+;;    ))
 
 (defun my-spacemacs-layer/pre-init-tramp-sh ()
   ;; use correct path when executing code block in remote :dir
