@@ -89,7 +89,9 @@
 
 (defun my-spacemacs-layer/pre-init-helm ()
   ;; make helm work better with tramp
-  (setq helm-buffer-skip-remote-checking t))
+  (setq helm-buffer-skip-remote-checking t)
+  ;; allow long buffer lanes (needed for ein)
+  (setq helm-buffer-max-length nil))
 
 (defun my-spacemacs-layer/post-init-persp-mode ()
   ;; Fix weird behavior of make-frame caused by persp-mode
