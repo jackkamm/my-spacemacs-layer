@@ -195,19 +195,19 @@
 ;;  (use-package org))
 
 (defun my-spacemacs-layer/post-init-org ()
-  (add-hook 'org-mode-hook
-            'spacemacs/toggle-line-numbers-off
-            'append)
+  ;;(add-hook 'org-mode-hook
+  ;;          'spacemacs/toggle-line-numbers-off
+  ;;          'append)
 
   ;; macro to send ob src block to REPL asynchronously
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "os" ",',sb,c")
 
   ;; TODO backup this file
-  (setq org-agenda-files (list "~/org/notes.org"))
+  (setq org-agenda-files (list "~/Dropbox/org/agenda.org"))
 
   (setq org-capture-templates
-        '(("t" "todo" entry (file "~/org/notes.org")
+        '(("t" "todo" entry (file "~/Dropbox/org/agenda.org")
            "* TODO [#A] %?\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n%a\n" :prepend t)))
 
   )
