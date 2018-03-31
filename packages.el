@@ -4,6 +4,7 @@
     (tramp-sh :location built-in)
     multi-term
     avy
+    (term :location built-in)
     evil
     ess
     auctex
@@ -208,6 +209,20 @@
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path)))
 
 (defun my-spacemacs-layer/init-tramp-sh () ())
+
+(defun my-spacemacs-layer/post-init-term ()
+  ;; fixes https://emacs.stackexchange.com/questions/17085/undesirable-cursor-jump-after-movement-with-m-left-or-m-right-in-term-mode
+  ;; TODO remove after upgrading to emacs26
+  (with-eval-after-load 'term
+    ;; Fix forward/backward word when (term-in-char-mode).
+    (define-key term-raw-map (kbd "<C-left>")
+      (lambda () (interactive) (term-send-raw-string "\eb")))
+    (define-key term-raw-map (kbd "<M-left>")
+      (lambda () (interactive) (term-send-raw-string "\eb")))
+    (define-key term-raw-map (kbd "<C-right>")
+      (lambda () (interactive) (term-send-raw-string "\ef")))
+    (define-key term-raw-map (kbd "<M-right>")
+      (lambda () (interactive) (term-send-raw-string "\ef")))))
 
 (defun my-spacemacs-layer/post-init-multi-term ()
   (with-eval-after-load 'multi-term
